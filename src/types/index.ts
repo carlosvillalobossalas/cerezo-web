@@ -9,7 +9,7 @@ export interface Product {
   categoryId: string;
   description: string;
   sizes: ProductSize[];
-  basePrice: number; // shown when no specific size selected
+  basePrice: number;
   imageUrl: string;
   tags?: string[];
   available: boolean;

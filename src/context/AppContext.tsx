@@ -1,42 +1,36 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import type { Category, Product, Announcement, StoreConfig, OrderItem, OrderFormData } from './types';
+import React, { createContext, useContext, useState, useCallback } from 'react';
+import type { Category, Product, Announcement, StoreConfig, OrderItem } from '../types';
 import {
   getCategories, getProducts, getAnnouncements, getConfig,
   saveCategories, saveProducts, saveAnnouncements, saveConfig,
-  LS_KEYS,
-} from './data';
+  isAdminSession, setAdminSession, clearAdminSession,
+} from '../lib/mock/storage';
 
-// ─── App Context ─────────────────────────────────────────────────────────────
+interface Toast {
+  id: number;
+  msg: string;
+  type: 'success' | 'error' | 'default';
+}
 
 interface AppContextValue {
-  // Data
   categories: Category[];
   products: Product[];
   announcements: Announcement[];
   config: StoreConfig;
-  // Order
   orderItems: OrderItem[];
   addToOrder: (item: OrderItem) => void;
   removeFromOrder: (productId: string) => void;
   updateOrderItem: (productId: string, updates: Partial<OrderItem>) => void;
   clearOrder: () => void;
-  // Admin
   isAdmin: boolean;
   login: (username: string, password: string) => boolean;
   logout: () => void;
-  // Admin data mutations
   setCategories: (cats: Category[]) => void;
   setProducts: (prods: Product[]) => void;
   setAnnouncements: (anns: Announcement[]) => void;
   updateConfig: (cfg: StoreConfig) => void;
-  // Toast
   showToast: (msg: string, type?: 'success' | 'error' | 'default') => void;
-  // Views
-  currentView: View;
-  setView: (v: View) => void;
 }
-
-export type View = 'catalog' | 'login' | 'admin';
 
 const AppContext = createContext<AppContextValue>(null!);
 
@@ -46,28 +40,21 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [announcements, setAnnouncementsState] = useState<Announcement[]>(getAnnouncements);
   const [config, setConfigState] = useState<StoreConfig>(getConfig);
   const [orderItems, setOrderItems] = useState<OrderItem[]>([]);
-  const [isAdmin, setIsAdmin] = useState(() => !!sessionStorage.getItem(LS_KEYS.adminSession));
-  const [toasts, setToasts] = useState<{ id: number; msg: string; type: string }[]>([]);
-  const [currentView, setCurrentView] = useState<View>(() =>
-    sessionStorage.getItem(LS_KEYS.adminSession) ? 'admin' : 'catalog'
-  );
-
-  const setView = useCallback((v: View) => setCurrentView(v), []);
+  const [isAdmin, setIsAdmin] = useState<boolean>(isAdminSession);
+  const [toasts, setToasts] = useState<Toast[]>([]);
 
   const login = useCallback((username: string, password: string) => {
     if (username === 'admin' && password === 'cerezo2024') {
-      sessionStorage.setItem(LS_KEYS.adminSession, '1');
+      setAdminSession();
       setIsAdmin(true);
-      setCurrentView('admin');
       return true;
     }
     return false;
   }, []);
 
   const logout = useCallback(() => {
-    sessionStorage.removeItem(LS_KEYS.adminSession);
+    clearAdminSession();
     setIsAdmin(false);
-    setCurrentView('catalog');
   }, []);
 
   const setCategories = useCallback((cats: Category[]) => {
@@ -125,13 +112,20 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       isAdmin, login, logout,
       setCategories, setProducts, setAnnouncements, updateConfig,
       showToast,
-      currentView, setView,
     }}>
       {children}
       {/* Global Toasts */}
-      <div className="toast-container">
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-2 items-center pointer-events-none">
         {toasts.map(t => (
-          <div key={t.id} className={`toast${t.type !== 'default' ? ` toast--${t.type}` : ''}`}>
+          <div
+            key={t.id}
+            className={[
+              'px-5 py-3 rounded-full text-sm font-medium shadow-lg animate-[fadeIn_0.2s_ease]',
+              t.type === 'success' && 'bg-green-600 text-white',
+              t.type === 'error' && 'bg-red-600 text-white',
+              t.type === 'default' && 'bg-text text-white',
+            ].filter(Boolean).join(' ')}
+          >
             {t.msg}
           </div>
         ))}

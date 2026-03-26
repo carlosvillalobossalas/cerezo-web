@@ -1,4 +1,4 @@
-import type { Category, Product, Announcement, StoreConfig } from './types';
+import type { Category, Product, Announcement, StoreConfig } from '../../types';
 
 export const MOCK_CATEGORIES: Category[] = [
   { id: 'pasteles', name: 'Pasteles', emoji: '🎂' },
@@ -143,49 +143,3 @@ export const MOCK_ANNOUNCEMENTS: Announcement[] = [
 export const DEFAULT_CONFIG: StoreConfig = {
   whatsappNumber: '521XXXXXXXXXX',
 };
-
-// LocalStorage keys for admin-managed data
-export const LS_KEYS = {
-  categories: 'cerezo_categories',
-  products: 'cerezo_products',
-  announcements: 'cerezo_announcements',
-  config: 'cerezo_config',
-  adminSession: 'cerezo_admin_session',
-};
-
-// Helpers: load from localStorage or fall back to mock
-export function getCategories(): Category[] {
-  const stored = localStorage.getItem(LS_KEYS.categories);
-  return stored ? JSON.parse(stored) : MOCK_CATEGORIES;
-}
-
-export function getProducts(): Product[] {
-  const stored = localStorage.getItem(LS_KEYS.products);
-  return stored ? JSON.parse(stored) : MOCK_PRODUCTS;
-}
-
-export function getAnnouncements(): Announcement[] {
-  const stored = localStorage.getItem(LS_KEYS.announcements);
-  return stored ? JSON.parse(stored) : MOCK_ANNOUNCEMENTS;
-}
-
-export function getConfig(): StoreConfig {
-  const stored = localStorage.getItem(LS_KEYS.config);
-  return stored ? JSON.parse(stored) : DEFAULT_CONFIG;
-}
-
-export function saveCategories(data: Category[]) {
-  localStorage.setItem(LS_KEYS.categories, JSON.stringify(data));
-}
-
-export function saveProducts(data: Product[]) {
-  localStorage.setItem(LS_KEYS.products, JSON.stringify(data));
-}
-
-export function saveAnnouncements(data: Announcement[]) {
-  localStorage.setItem(LS_KEYS.announcements, JSON.stringify(data));
-}
-
-export function saveConfig(data: StoreConfig) {
-  localStorage.setItem(LS_KEYS.config, JSON.stringify(data));
-}
