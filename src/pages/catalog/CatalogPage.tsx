@@ -31,7 +31,7 @@ export function CatalogPage() {
             <p className="text-xs font-semibold text-text-muted uppercase tracking-wider px-4 mb-3">
               Novedades
             </p>
-            <div className="flex gap-4 overflow-x-auto px-4 pb-3 snap-x snap-mandatory scrollbar-none">
+            <div className="flex gap-4 overflow-x-auto px-4 pb-4 pt-1 snap-x snap-mandatory scrollbar-none after:content-[''] after:w-1 after:flex-shrink-0">
               {activeAnnouncements.map(ann => (
                 <div
                   key={ann.id}
@@ -128,7 +128,7 @@ export function CatalogPage() {
 
       {/* FAB */}
       <button
-        className="fixed bottom-6 right-4 z-30 flex items-center gap-2 bg-primary text-white pl-4 pr-5 py-3.5 rounded-full shadow-lg hover:bg-primary-dark active:scale-95 transition-all duration-200 relative"
+        className="fixed bottom-6 right-4 left-auto z-50 flex items-center gap-2 bg-primary text-white pl-4 pr-5 py-3.5 rounded-full shadow-lg hover:bg-primary-dark active:scale-95 transition-all duration-200"
         onClick={() => setOrderOpen(true)}
         aria-label="Ver pedido"
       >
