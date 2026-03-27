@@ -95,7 +95,7 @@ export function OrderDrawer({ onClose }: Props) {
               <div className="space-y-3">
                 {orderItems.map(item => (
                   <div
-                    key={`₡{item.product.id}-₡{item.size.name}`}
+                    key={`${item.product.id}-${item.size.name}`}
                     className="bg-bg rounded-lg p-3 border border-border"
                   >
                     <div className="flex items-start gap-3">
@@ -116,7 +116,7 @@ export function OrderDrawer({ onClose }: Props) {
                         </p>
                         <button
                           onClick={() => removeFromOrder(item.product.id)}
-                          aria-label={`Eliminar ₡{item.product.name}`}
+                          aria-label={`Eliminar ${item.product.name}`}
                           className="w-6 h-6 rounded-full bg-red-50 text-red-400 text-xs flex items-center justify-center hover:bg-red-100 transition-colors"
                         >
                           ✕
@@ -159,7 +159,7 @@ export function OrderDrawer({ onClose }: Props) {
                 {/* Total */}
                 <div className="flex items-center justify-between pt-2 px-1">
                   <span className="text-sm text-text-muted font-medium">Total estimado</span>
-                  <span className="text-base font-bold text-text">₡{total.toLocaleString()} MXN</span>
+                  <span className="text-base font-bold text-text">₡{total.toLocaleString()} CRC</span>
                 </div>
               </div>
             )}
@@ -189,7 +189,7 @@ export function OrderDrawer({ onClose }: Props) {
                   id="order-phone"
                   className={inputClass}
                   type="tel"
-                  placeholder="55 0000 0000"
+                  placeholder="8888 8888"
                   value={customerPhone}
                   onChange={e => setCustomerPhone(e.target.value)}
                 />
@@ -214,7 +214,7 @@ export function OrderDrawer({ onClose }: Props) {
                 <label className={labelClass} htmlFor="order-comments">Comentarios generales</label>
                 <textarea
                   id="order-comments"
-                  className={`₡{inputClass} resize-none min-h-[90px]`}
+                  className={`${inputClass} resize-none min-h-[90px]`}
                   placeholder="Alergias, colores especiales, diseños, estilo de decoración..."
                   value={comments}
                   onChange={e => setComments(e.target.value)}
