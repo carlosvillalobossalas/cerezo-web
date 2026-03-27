@@ -15,7 +15,7 @@ export function ProductCard({ product, category, onClick }: Props) {
       role="button"
       tabIndex={0}
       onKeyDown={e => e.key === 'Enter' && onClick()}
-      aria-label={`Ver detalles de ${product.name}`}
+      aria-label={`Ver detalles de ₡{product.name}`}
     >
       {/* Image */}
       <div className="aspect-[4/3] overflow-hidden bg-primary-light relative">
@@ -51,7 +51,7 @@ export function ProductCard({ product, category, onClick }: Props) {
           </span>
         ))}
         <p className="text-sm font-semibold text-primary mt-1">
-          Desde ${product.basePrice.toLocaleString()}
+          Desde ₡{product.basePrice.toLocaleString()}
         </p>
       </div>
     </article>

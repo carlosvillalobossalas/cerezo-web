@@ -16,7 +16,7 @@ export function ProductModal({ product, onClose }: Props) {
 
   function handleAdd() {
     addToOrder({ product, size: selectedSize, quantity: 1, note: '' });
-    showToast(`${product.name} agregado al pedido`, 'success');
+    showToast(`₡{product.name} agregado al pedido`, 'success');
     onClose();
   }
 
@@ -103,7 +103,7 @@ export function ProductModal({ product, onClose }: Props) {
                     'text-sm font-semibold',
                     selected ? 'text-primary-dark' : 'text-text',
                   ].join(' ')}>
-                    ${size.price.toLocaleString()}
+                    ₡{size.price.toLocaleString()}
                   </span>
                 </button>
               );

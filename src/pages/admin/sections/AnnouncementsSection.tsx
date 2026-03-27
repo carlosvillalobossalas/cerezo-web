@@ -108,7 +108,7 @@ export function AnnouncementsSection() {
           <div>
             <label className={labelClass}>Descripción</label>
             <textarea
-              className={`${inputClass} resize-none min-h-[80px]`}
+              className={`₡{inputClass} resize-none min-h-[80px]`}
               value={form.body}
               onChange={e => setForm({ ...form, body: e.target.value })}
               placeholder="Texto del anuncio..."
@@ -138,10 +138,10 @@ export function AnnouncementsSection() {
           <label className="flex items-center justify-between cursor-pointer">
             <span className="text-sm text-text">Visible en el catálogo</span>
             <div
-              className={`relative w-10 h-6 rounded-full transition-colors ${form.active ? 'bg-primary' : 'bg-border-strong'}`}
+              className={`relative w-10 h-6 rounded-full transition-colors ₡{form.active ? 'bg-primary' : 'bg-border-strong'}`}
               onClick={() => setForm({ ...form, active: !form.active })}
             >
-              <div className={`absolute top-1 w-4 h-4 rounded-full bg-white shadow-sm transition-transform ${form.active ? 'translate-x-5' : 'translate-x-1'}`} />
+              <div className={`absolute top-1 w-4 h-4 rounded-full bg-white shadow-sm transition-transform ₡{form.active ? 'translate-x-5' : 'translate-x-1'}`} />
             </div>
           </label>
 

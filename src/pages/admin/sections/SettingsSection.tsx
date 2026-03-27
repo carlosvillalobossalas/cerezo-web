@@ -28,12 +28,12 @@ export function SettingsSection() {
           <input
             id="wa-number"
             className="w-full px-3 py-2.5 rounded-md border border-border bg-surface text-text text-sm placeholder:text-text-light focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
-            placeholder="521XXXXXXXXXX"
+            placeholder="506XXXXXXXX"
             value={number}
             onChange={e => setNumber(e.target.value)}
           />
           <p className="text-xs text-text-light mt-1.5">
-            Formato internacional sin + ni espacios. Ej: 5215512345678 (México)
+            Formato internacional sin + ni espacios. Ej: 50688888888 (Costa Rica)
           </p>
         </div>
         <button

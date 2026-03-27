@@ -3,7 +3,7 @@ import type { OrderFormData } from '../types';
 export function buildWhatsAppUrl(form: OrderFormData, whatsappNumber: string): string {
   const itemsText = form.items
     .map(item => {
-      const line = `• ${item.product.name} (${item.size.name}) x${item.quantity} — $${(item.size.price * item.quantity).toLocaleString()}`;
+      const line = `• ${item.product.name} (${item.size.name}) x${item.quantity} — ₡${(item.size.price * item.quantity).toLocaleString()}`;
       return item.note ? `${line}\n  ✏️ ${item.note}` : line;
     })
     .join('\n');
@@ -19,9 +19,9 @@ export function buildWhatsAppUrl(form: OrderFormData, whatsappNumber: string): s
 🧁 *Productos:*
 ${itemsText}
 
-${form.comments ? `💬 Comentarios: ${form.comments}\n\n` : ''}💰 Total estimado: $${total.toLocaleString()} MXN
+${form.comments ? `💬 Comentarios: ${form.comments}\n\n` : ''}💰 Total estimado: ₡${total.toLocaleString()} CRC
 
-_Pedido generado desde cerezo.mx_`;
+_Pedido generado desde Cerezo Costa Rica_`;
 
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
 }

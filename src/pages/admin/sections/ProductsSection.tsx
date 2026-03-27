@@ -100,7 +100,7 @@ function ProductForm({ initial, onSave, onCancel }: ProductFormProps) {
       <div>
         <label className={labelClass}>Descripción</label>
         <textarea
-          className={`${inputClass} resize-none min-h-[80px]`}
+          className={`₡{inputClass} resize-none min-h-[80px]`}
           value={form.description}
           onChange={e => setForm({ ...form, description: e.target.value })}
           placeholder="Describe el producto..."
@@ -148,7 +148,7 @@ function ProductForm({ initial, onSave, onCancel }: ProductFormProps) {
                 onChange={e => updateSize(idx, { name: e.target.value })}
               />
               <input
-                className={`${inputClass} w-28 flex-shrink-0`}
+                className={`₡{inputClass} w-28 flex-shrink-0`}
                 type="number"
                 min="0"
                 placeholder="Precio"
@@ -181,10 +181,10 @@ function ProductForm({ initial, onSave, onCancel }: ProductFormProps) {
       <label className="flex items-center justify-between cursor-pointer">
         <span className="text-sm text-text">Disponible en catálogo</span>
         <div
-          className={`relative w-10 h-6 rounded-full transition-colors cursor-pointer ${form.available ? 'bg-primary' : 'bg-border-strong'}`}
+          className={`relative w-10 h-6 rounded-full transition-colors cursor-pointer ₡{form.available ? 'bg-primary' : 'bg-border-strong'}`}
           onClick={() => setForm({ ...form, available: !form.available })}
         >
-          <div className={`absolute top-1 w-4 h-4 rounded-full bg-white shadow-sm transition-transform ${form.available ? 'translate-x-5' : 'translate-x-1'}`} />
+          <div className={`absolute top-1 w-4 h-4 rounded-full bg-white shadow-sm transition-transform ₡{form.available ? 'translate-x-5' : 'translate-x-1'}`} />
         </div>
       </label>
 
@@ -284,7 +284,7 @@ export function ProductsSection() {
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-text truncate">{p.name}</p>
                   <p className="text-xs text-text-muted mt-0.5">
-                    {cat?.emoji} {cat?.name} · Desde ${p.basePrice.toLocaleString()}
+                    {cat?.emoji} {cat?.name} · Desde ₡{p.basePrice.toLocaleString()}
                     {!p.available && (
                       <span className="text-amber-500 ml-1">· No disponible</span>
                     )}
